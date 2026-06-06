@@ -2,6 +2,16 @@
 
 A full-stack web application for visualizing cooperative UAV task assignment optimized by multi-agent Proximal Policy Optimization (PPO).
 
+## Demo
+
+**Simulation in progress** — UAVs flying from the dock, cooperating on tasks in real time:
+
+![Simulation in progress](docs/screenshot-sim.png)
+
+**Mission complete** — all tasks finished, stats panel showing final PPO reward and workload delivered:
+
+![Mission complete](docs/screenshot-complete.png)
+
 ## Architecture
 
 - **Backend**: Python + FastAPI + PyTorch (multi-agent PPO)
