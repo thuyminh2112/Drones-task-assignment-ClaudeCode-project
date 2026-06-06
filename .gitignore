@@ -20,3 +20,4 @@ frontend/.vite/
 .env
 *.log
 checkpoints/
+CLAUDE.md
