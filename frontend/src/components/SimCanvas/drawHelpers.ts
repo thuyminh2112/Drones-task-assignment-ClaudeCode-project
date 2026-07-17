@@ -25,7 +25,8 @@ export function makeScale(
 
   return {
     toCanvasX: (wx) => padding + wx * scaleX,
-    toCanvasY: (wy) => padding + wy * scaleY,
+    // Flip vertically: world y=0 at the bottom, increasing upward (standard Cartesian).
+    toCanvasY: (wy) => canvasH - padding - wy * scaleY,
     taskRadius: (workload, maxWorkload) =>
       6 + (workload / Math.max(maxWorkload, 1)) * 14,
   };
@@ -52,6 +53,61 @@ export function drawBackground(
   ctx.setLineDash([6, 4]);
   ctx.strokeRect(x0, y0, x1 - x0, y1 - y0);
   ctx.setLineDash([]);
+}
+
+function niceStep(range: number): number {
+  const rough = range / 6;
+  const mag = 10 ** Math.floor(Math.log10(rough));
+  const norm = rough / mag;
+  let step: number;
+  if (norm < 1.5) step = 1;
+  else if (norm < 3) step = 2;
+  else if (norm < 7) step = 5;
+  else step = 10;
+  return step * mag;
+}
+
+export function drawAxes(
+  ctx: CanvasRenderingContext2D,
+  scale: DrawScale,
+  config: EnvConfig
+) {
+  const stepX = niceStep(config.area_w);
+  const stepY = niceStep(config.area_h);
+  const x0 = scale.toCanvasX(0);
+  const x1 = scale.toCanvasX(config.area_w);
+  const yTop = Math.min(scale.toCanvasY(0), scale.toCanvasY(config.area_h));
+  const yBottom = Math.max(scale.toCanvasY(0), scale.toCanvasY(config.area_h));
+
+  ctx.font = "9px monospace";
+  ctx.strokeStyle = "#1e293b";
+  ctx.lineWidth = 1;
+
+  // Vertical grid lines + x-axis tick labels (below the boundary)
+  ctx.textAlign = "center";
+  ctx.textBaseline = "top";
+  ctx.fillStyle = "#64748b";
+  for (let x = 0; x <= config.area_w + 1e-6; x += stepX) {
+    const cx = scale.toCanvasX(x);
+    ctx.beginPath();
+    ctx.moveTo(cx, yTop);
+    ctx.lineTo(cx, yBottom);
+    ctx.stroke();
+    // Origin's "0" is drawn once by the y-axis loop below; skip it here to avoid overlap.
+    if (x > 1e-6) ctx.fillText(`${Math.round(x)}`, cx, yBottom + 4);
+  }
+
+  // Horizontal grid lines + y-axis tick labels (left of the boundary)
+  ctx.textAlign = "right";
+  ctx.textBaseline = "middle";
+  for (let y = 0; y <= config.area_h + 1e-6; y += stepY) {
+    const cy = scale.toCanvasY(y);
+    ctx.beginPath();
+    ctx.moveTo(x0, cy);
+    ctx.lineTo(x1, cy);
+    ctx.stroke();
+    ctx.fillText(`${Math.round(y)}`, x0 - 6, cy);
+  }
 }
 
 export function drawDock(
@@ -192,11 +248,11 @@ export function drawUAVs(
     if (uav.status === "flying_to_task" && uav.target_task_id !== null) {
       const task = tasks.find((t) => t.id === uav.target_task_id);
       if (task) {
-        angle = Math.atan2(task.y - uav.y, task.x - uav.x);
+        angle = Math.atan2(scale.toCanvasY(task.y) - cy, scale.toCanvasX(task.x) - cx);
       }
     } else if (uav.status === "flying_home" && uav.path.length > 1) {
       const prev = uav.path[uav.path.length - 2];
-      angle = Math.atan2(uav.y - prev[1], uav.x - prev[0]);
+      angle = Math.atan2(cy - scale.toCanvasY(prev[1]), cx - scale.toCanvasX(prev[0]));
     }
 
     // Draw triangle
