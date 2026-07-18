@@ -10,7 +10,7 @@ export function AreaConfig() {
 
   return (
     <div className="space-y-3">
-      <h3 className="text-sm font-semibold text-slate-300 uppercase tracking-wider">Area & Settings</h3>
+      <h3 className="text-sm font-semibold text-slate-700 uppercase tracking-wider">Area & Settings</h3>
 
       <div className="grid grid-cols-2 gap-2">
         <div>
@@ -18,7 +18,7 @@ export function AreaConfig() {
           <input
             type="number" min={20} value={areaWidth}
             onChange={(e) => setAreaWidth(Math.max(20, +e.target.value))}
-            className="w-full bg-slate-800 border border-slate-600 rounded px-2 py-1 text-sm text-white"
+            className="w-full bg-white border border-slate-300 rounded px-2 py-1 text-sm text-slate-900"
           />
         </div>
         <div>
@@ -26,7 +26,7 @@ export function AreaConfig() {
           <input
             type="number" min={20} value={areaHeight}
             onChange={(e) => setAreaHeight(Math.max(20, +e.target.value))}
-            className="w-full bg-slate-800 border border-slate-600 rounded px-2 py-1 text-sm text-white"
+            className="w-full bg-white border border-slate-300 rounded px-2 py-1 text-sm text-slate-900"
           />
         </div>
       </div>

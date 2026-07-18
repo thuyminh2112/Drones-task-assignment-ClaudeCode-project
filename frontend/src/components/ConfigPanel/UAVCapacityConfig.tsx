@@ -10,21 +10,21 @@ export function UAVCapacityConfig() {
 
   return (
     <div className="space-y-3">
-      <h3 className="text-sm font-semibold text-slate-300 uppercase tracking-wider">UAVs</h3>
+      <h3 className="text-sm font-semibold text-slate-700 uppercase tracking-wider">UAVs</h3>
 
       <div className="flex items-center gap-3">
-        <label className="text-sm text-slate-400 w-20">Count</label>
+        <label className="text-sm text-slate-500 w-20">Count</label>
         <input
           type="number"
           min={1} max={20}
           value={nUavs}
           onChange={(e) => setNUavs(Math.max(1, Math.min(20, +e.target.value)))}
-          className="w-20 bg-slate-800 border border-slate-600 rounded px-2 py-1 text-sm text-white"
+          className="w-20 bg-white border border-slate-300 rounded px-2 py-1 text-sm text-slate-900"
         />
       </div>
 
       <div className="flex items-center gap-3">
-        <label className="text-sm text-slate-400 w-20">Capacity</label>
+        <label className="text-sm text-slate-500 w-20">Capacity</label>
         <div className="flex gap-2">
           {(["random", "manual"] as const).map((m) => (
             <button
@@ -33,7 +33,7 @@ export function UAVCapacityConfig() {
               className={`px-3 py-1 rounded text-xs font-medium transition-colors ${
                 capacityMode === m
                   ? "bg-blue-600 text-white"
-                  : "bg-slate-700 text-slate-300 hover:bg-slate-600"
+                  : "bg-white border border-slate-300 text-slate-600 hover:bg-slate-100"
               }`}
             >
               {m}
@@ -48,13 +48,13 @@ export function UAVCapacityConfig() {
           <input
             type="number" min={1} value={capacityRange[0]}
             onChange={(e) => setCapacityRange([+e.target.value, capacityRange[1]])}
-            className="w-16 bg-slate-800 border border-slate-600 rounded px-2 py-1 text-xs text-white"
+            className="w-16 bg-white border border-slate-300 rounded px-2 py-1 text-xs text-slate-900"
           />
           <span className="text-slate-500 text-xs">to</span>
           <input
             type="number" min={1} value={capacityRange[1]}
             onChange={(e) => setCapacityRange([capacityRange[0], +e.target.value])}
-            className="w-16 bg-slate-800 border border-slate-600 rounded px-2 py-1 text-xs text-white"
+            className="w-16 bg-white border border-slate-300 rounded px-2 py-1 text-xs text-slate-900"
           />
         </div>
       )}
@@ -68,7 +68,7 @@ export function UAVCapacityConfig() {
                 type="number" min={1}
                 value={capacities[i] ?? 5}
                 onChange={(e) => setCapacity(i, Math.max(1, +e.target.value))}
-                className="w-20 bg-slate-800 border border-slate-600 rounded px-2 py-1 text-xs text-white"
+                className="w-20 bg-white border border-slate-300 rounded px-2 py-1 text-xs text-slate-900"
               />
             </div>
           ))}

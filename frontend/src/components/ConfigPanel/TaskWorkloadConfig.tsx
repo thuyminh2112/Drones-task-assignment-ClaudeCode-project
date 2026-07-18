@@ -10,20 +10,20 @@ export function TaskWorkloadConfig() {
 
   return (
     <div className="space-y-3">
-      <h3 className="text-sm font-semibold text-slate-300 uppercase tracking-wider">Tasks</h3>
+      <h3 className="text-sm font-semibold text-slate-700 uppercase tracking-wider">Tasks</h3>
 
       <div className="flex items-center gap-3">
-        <label className="text-sm text-slate-400 w-20">Count</label>
+        <label className="text-sm text-slate-500 w-20">Count</label>
         <input
           type="number" min={1} max={30}
           value={nTasks}
           onChange={(e) => setNTasks(Math.max(1, Math.min(30, +e.target.value)))}
-          className="w-20 bg-slate-800 border border-slate-600 rounded px-2 py-1 text-sm text-white"
+          className="w-20 bg-white border border-slate-300 rounded px-2 py-1 text-sm text-slate-900"
         />
       </div>
 
       <div className="flex items-center gap-3">
-        <label className="text-sm text-slate-400 w-20">Workload</label>
+        <label className="text-sm text-slate-500 w-20">Workload</label>
         <div className="flex gap-2">
           {(["random", "manual"] as const).map((m) => (
             <button
@@ -32,7 +32,7 @@ export function TaskWorkloadConfig() {
               className={`px-3 py-1 rounded text-xs font-medium transition-colors ${
                 workloadMode === m
                   ? "bg-emerald-600 text-white"
-                  : "bg-slate-700 text-slate-300 hover:bg-slate-600"
+                  : "bg-white border border-slate-300 text-slate-600 hover:bg-slate-100"
               }`}
             >
               {m}
@@ -47,13 +47,13 @@ export function TaskWorkloadConfig() {
           <input
             type="number" min={1} value={workloadRange[0]}
             onChange={(e) => setWorkloadRange([+e.target.value, workloadRange[1]])}
-            className="w-16 bg-slate-800 border border-slate-600 rounded px-2 py-1 text-xs text-white"
+            className="w-16 bg-white border border-slate-300 rounded px-2 py-1 text-xs text-slate-900"
           />
           <span className="text-slate-500 text-xs">to</span>
           <input
             type="number" min={1} value={workloadRange[1]}
             onChange={(e) => setWorkloadRange([workloadRange[0], +e.target.value])}
-            className="w-16 bg-slate-800 border border-slate-600 rounded px-2 py-1 text-xs text-white"
+            className="w-16 bg-white border border-slate-300 rounded px-2 py-1 text-xs text-slate-900"
           />
         </div>
       )}
@@ -67,7 +67,7 @@ export function TaskWorkloadConfig() {
                 type="number" min={1}
                 value={workloads[i] ?? 5}
                 onChange={(e) => setWorkload(i, Math.max(1, +e.target.value))}
-                className="w-20 bg-slate-800 border border-slate-600 rounded px-2 py-1 text-xs text-white"
+                className="w-20 bg-white border border-slate-300 rounded px-2 py-1 text-xs text-slate-900"
               />
             </div>
           ))}

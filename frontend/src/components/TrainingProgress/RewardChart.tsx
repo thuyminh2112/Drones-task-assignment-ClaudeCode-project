@@ -12,24 +12,24 @@ export function RewardChart() {
         <LineChart data={history}>
           <XAxis
             dataKey="episode"
-            tick={{ fill: "#64748b", fontSize: 10 }}
+            tick={{ fill: "#898781", fontSize: 10 }}
             tickLine={false}
           />
           <YAxis
-            tick={{ fill: "#64748b", fontSize: 10 }}
+            tick={{ fill: "#898781", fontSize: 10 }}
             tickLine={false}
             axisLine={false}
             width={40}
           />
           <Tooltip
-            contentStyle={{ background: "#1e293b", border: "1px solid #334155", fontSize: 11 }}
+            contentStyle={{ background: "#fcfcfb", border: "1px solid #e1e0d9", fontSize: 11, color: "#0b0b0b" }}
             labelFormatter={(v) => `Update ${v}`}
             formatter={(v) => [Number(v).toFixed(2), "Reward"]}
           />
           <Line
             type="monotone"
             dataKey="reward"
-            stroke="#6366f1"
+            stroke="#4a3aa7"
             strokeWidth={1.5}
             dot={false}
           />

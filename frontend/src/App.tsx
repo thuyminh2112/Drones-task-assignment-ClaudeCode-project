@@ -70,7 +70,7 @@ export default function App() {
   };
 
   return (
-    <div className="flex h-screen overflow-hidden bg-slate-950">
+    <div className="flex h-screen overflow-hidden bg-slate-100">
       <ConfigPanel onStart={handleStart} />
 
       <div className="flex-1 flex flex-col min-w-0">
@@ -84,17 +84,17 @@ export default function App() {
           <SimCanvas />
         </div>
 
-        <div className="bg-slate-900 border-t border-slate-700 px-4 py-2 flex items-center gap-4 text-xs text-slate-500">
-          <span className="font-semibold text-slate-400">UAV Mission Control</span>
+        <div className="bg-white border-t border-slate-200 px-4 py-2 flex items-center gap-4 text-xs text-slate-500">
+          <span className="font-semibold text-slate-600">UAV Mission Control</span>
           {sessionId && (
             <span>
-              Session: <span className="font-mono text-slate-400">{sessionId}</span>
+              Session: <span className="font-mono text-slate-600">{sessionId}</span>
             </span>
           )}
           {(phase === "done" || (phase === "idle" && sessionId)) && (
             <button
               onClick={handleNewMission}
-              className="ml-auto text-blue-400 hover:text-blue-300 transition-colors"
+              className="ml-auto text-blue-600 hover:text-blue-500 transition-colors"
             >
               New Mission
             </button>

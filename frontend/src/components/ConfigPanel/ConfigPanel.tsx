@@ -34,32 +34,32 @@ export function ConfigPanel({ onStart }: Props) {
   const disabled = loading || (phase !== "idle" && phase !== "done");
 
   return (
-    <div className="w-72 bg-slate-900 border-r border-slate-700 flex flex-col h-full overflow-y-auto">
-      <div className="p-4 border-b border-slate-700">
-        <h1 className="text-lg font-bold text-white">UAV Mission Planner</h1>
-        <p className="text-xs text-slate-400 mt-0.5">Multi-agent PPO task assignment</p>
+    <div className="w-72 bg-slate-50 border-r border-slate-300 flex flex-col h-full overflow-y-auto">
+      <div className="p-4 border-b border-slate-200 bg-white">
+        <h1 className="text-lg font-bold text-slate-900">UAV Mission Planner</h1>
+        <p className="text-xs text-slate-500 mt-0.5">Multi-agent PPO task assignment</p>
       </div>
 
       <div className="flex-1 p-4 space-y-6">
         <UAVCapacityConfig />
-        <div className="border-t border-slate-700" />
+        <div className="border-t border-slate-200" />
         <UAVInitialPositionConfig />
-        <div className="border-t border-slate-700" />
+        <div className="border-t border-slate-200" />
         <TaskWorkloadConfig />
-        <div className="border-t border-slate-700" />
+        <div className="border-t border-slate-200" />
         <AreaConfig />
       </div>
 
-      <div className="p-4 border-t border-slate-700">
+      <div className="p-4 border-t border-slate-200 bg-white">
         {error && (
-          <p className="text-red-400 text-xs mb-2">{error}</p>
+          <p className="text-red-600 text-xs mb-2">{error}</p>
         )}
         <button
           onClick={handleStart}
           disabled={disabled}
           className={`w-full py-2.5 rounded-lg font-semibold text-sm transition-all ${
             disabled
-              ? "bg-slate-700 text-slate-500 cursor-not-allowed"
+              ? "bg-slate-200 text-slate-400 cursor-not-allowed"
               : "bg-blue-600 hover:bg-blue-500 text-white shadow-lg shadow-blue-900/30"
           }`}
         >

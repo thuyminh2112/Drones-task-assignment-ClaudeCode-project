@@ -5,7 +5,7 @@ export function UAVInitialPositionConfig() {
 
   return (
     <div className="space-y-3">
-      <h3 className="text-sm font-semibold text-slate-300 uppercase tracking-wider">
+      <h3 className="text-sm font-semibold text-slate-700 uppercase tracking-wider">
         Initial Position of UAVs
       </h3>
 
@@ -15,7 +15,7 @@ export function UAVInitialPositionConfig() {
           <input
             type="number" value={dockX}
             onChange={(e) => setDockX(+e.target.value)}
-            className="w-full bg-slate-800 border border-slate-600 rounded px-2 py-1 text-sm text-white"
+            className="w-full bg-white border border-slate-300 rounded px-2 py-1 text-sm text-slate-900"
           />
         </div>
         <div>
@@ -23,7 +23,7 @@ export function UAVInitialPositionConfig() {
           <input
             type="number" value={dockY}
             onChange={(e) => setDockY(+e.target.value)}
-            className="w-full bg-slate-800 border border-slate-600 rounded px-2 py-1 text-sm text-white"
+            className="w-full bg-white border border-slate-300 rounded px-2 py-1 text-sm text-slate-900"
           />
         </div>
       </div>

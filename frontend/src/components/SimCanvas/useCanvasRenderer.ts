@@ -51,7 +51,7 @@ export function useCanvasRenderer(canvasRef: RefObject<HTMLCanvasElement | null>
 
       if (!envConfig) {
         drawDock(ctx, scale, activeConfig);
-        ctx.fillStyle = "#475569";
+        ctx.fillStyle = "#898781";
         ctx.font = "14px sans-serif";
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
