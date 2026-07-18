@@ -8,9 +8,9 @@ The goal is to develop a system in which multiple UAVs transport medical supplie
 
 ## Demo
 
-**Simulation in progress** — UAVs flying from the dock, cooperating on tasks in real time:
+**Mission planner** — configure UAV count/capacity, task count/workload, and area/dock settings before launching:
 
-![Simulation in progress](docs/screenshot-sim.png)
+![Mission planner](docs/screenshot-sim.png)
 
 **Mission complete** — all tasks finished, stats panel showing final PPO reward and workload delivered:
 
