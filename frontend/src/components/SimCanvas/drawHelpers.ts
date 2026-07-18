@@ -1,10 +1,14 @@
 import type { UAVData, TaskData, EnvConfig } from "../../types";
+import droneIconUrl from "../../assets/drone.png";
 
 const UAV_COLORS = [
   "#60a5fa", "#34d399", "#f87171", "#fbbf24",
   "#a78bfa", "#fb7185", "#38bdf8", "#4ade80",
   "#f472b6", "#facc15", "#2dd4bf", "#c084fc",
 ];
+
+const droneIcon = new Image();
+droneIcon.src = droneIconUrl;
 
 export interface DrawScale {
   toCanvasX: (wx: number) => number;
@@ -238,6 +242,8 @@ export function drawUAVs(
   tasks: TaskData[],
   scale: DrawScale
 ) {
+  const iconReady = droneIcon.complete && droneIcon.naturalWidth > 0;
+
   for (const uav of uavs) {
     const cx = scale.toCanvasX(uav.x);
     const cy = scale.toCanvasY(uav.y);
@@ -255,21 +261,39 @@ export function drawUAVs(
       angle = Math.atan2(cy - scale.toCanvasY(prev[1]), cx - scale.toCanvasX(prev[0]));
     }
 
-    // Draw triangle
     const size = 10;
     ctx.save();
     ctx.translate(cx, cy);
-    ctx.rotate(angle + Math.PI / 2);
+
+    // Colored halo identifies the agent, since the drone icon art has no per-agent color.
     ctx.beginPath();
-    ctx.moveTo(0, -size);
-    ctx.lineTo(-size * 0.6, size * 0.6);
-    ctx.lineTo(size * 0.6, size * 0.6);
-    ctx.closePath();
-    ctx.fillStyle = uav.status === "docked" ? color + "80" : color;
+    ctx.arc(0, 0, size + 3, 0, Math.PI * 2);
+    ctx.fillStyle = color + "33";
     ctx.fill();
-    ctx.strokeStyle = "#fff";
-    ctx.lineWidth = 1;
+    ctx.strokeStyle = color;
+    ctx.lineWidth = 1.5;
     ctx.stroke();
+
+    ctx.globalAlpha = uav.status === "docked" ? 0.55 : 1;
+    ctx.rotate(angle + Math.PI / 2);
+
+    if (iconReady) {
+      const d = size * 2.2;
+      ctx.drawImage(droneIcon, -d / 2, -d / 2, d, d);
+    } else {
+      // Fallback while the icon is still loading.
+      ctx.beginPath();
+      ctx.moveTo(0, -size);
+      ctx.lineTo(-size * 0.6, size * 0.6);
+      ctx.lineTo(size * 0.6, size * 0.6);
+      ctx.closePath();
+      ctx.fillStyle = color;
+      ctx.fill();
+      ctx.strokeStyle = "#fff";
+      ctx.lineWidth = 1;
+      ctx.stroke();
+    }
+    ctx.globalAlpha = 1;
     ctx.restore();
 
     // Capacity label below UAV
