@@ -255,10 +255,17 @@ class UAVTaskEnv:
 
     def _is_done(self) -> bool:
         all_tasks_done = all(t.status == "done" for t in self.tasks)
-        all_uavs_idle = all(
+        all_uavs_docked = all(u.status == "docked" for u in self.uavs)
+        # Tasks being done isn't enough — UAVs still flying home must land first.
+        if all_tasks_done and all_uavs_docked:
+            return True
+
+        # Separate stall check: every UAV docked with no capacity left and
+        # work still pending means no further progress is possible.
+        all_uavs_exhausted = all(
             u.status == "docked" and u.capacity == 0 for u in self.uavs
         )
-        return all_tasks_done or all_uavs_idle
+        return all_uavs_exhausted
 
     def _compute_obs(self, agent_id: int) -> np.ndarray:
         uav = self.uavs[agent_id]
