@@ -50,6 +50,29 @@ npm run dev
 
 Then open http://localhost:5173
 
+## Windows Desktop Build (.exe)
+
+The app can be packaged as a standalone Windows app: a single FastAPI server
+serves both the built frontend and the API/WebSocket, and a small launcher
+opens it in your default browser.
+
+**Get a build:** push a `v*` tag (e.g. `git tag v1.0.0 && git push origin v1.0.0`),
+or run the *Build Windows EXE* workflow manually from the Actions tab. Download
+the `UAVMissionPlanner-windows` artifact, unzip it, and run `UAVMissionPlanner.exe`
+— no Python or Node install needed on the target machine.
+
+**Build it yourself on Windows:**
+
+```powershell
+cd frontend; npm ci; npm run build; cd ..
+pip install -r backend/requirements.txt pyinstaller
+pyinstaller desktop/build.spec --noconfirm
+# → dist/UAVMissionPlanner/UAVMissionPlanner.exe
+```
+
+The build bundles PyTorch, so expect it to take a while and produce a large
+(multi-hundred-MB) `dist/UAVMissionPlanner/` folder — that's normal.
+
 ## Features
 
 - **Multi-agent PPO**: IPPO with parameter sharing — all UAVs share one network
