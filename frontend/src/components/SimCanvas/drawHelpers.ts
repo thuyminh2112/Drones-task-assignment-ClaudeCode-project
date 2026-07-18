@@ -262,24 +262,16 @@ export function drawUAVs(
     }
 
     const size = 10;
+    const iconDiameter = 76;
+    const labelOffset = iconDiameter / 2 + 6;
     ctx.save();
     ctx.translate(cx, cy);
-
-    // Colored halo identifies the agent, since the drone icon art has no per-agent color.
-    ctx.beginPath();
-    ctx.arc(0, 0, size + 3, 0, Math.PI * 2);
-    ctx.fillStyle = color + "33";
-    ctx.fill();
-    ctx.strokeStyle = color;
-    ctx.lineWidth = 1.5;
-    ctx.stroke();
 
     ctx.globalAlpha = uav.status === "docked" ? 0.55 : 1;
     ctx.rotate(angle + Math.PI / 2);
 
     if (iconReady) {
-      const d = size * 2.2;
-      ctx.drawImage(droneIcon, -d / 2, -d / 2, d, d);
+      ctx.drawImage(droneIcon, -iconDiameter / 2, -iconDiameter / 2, iconDiameter, iconDiameter);
     } else {
       // Fallback while the icon is still loading.
       ctx.beginPath();
@@ -301,12 +293,12 @@ export function drawUAVs(
     ctx.font = "bold 10px monospace";
     ctx.textAlign = "center";
     ctx.textBaseline = "top";
-    ctx.fillText(`${uav.capacity}`, cx, cy + 13);
+    ctx.fillText(`${uav.capacity}`, cx, cy + labelOffset);
 
     // UAV ID label
     ctx.fillStyle = "#94a3b8";
     ctx.font = "9px sans-serif";
     ctx.textBaseline = "bottom";
-    ctx.fillText(`U${uav.id + 1}`, cx, cy - 13);
+    ctx.fillText(`U${uav.id + 1}`, cx, cy - labelOffset);
   }
 }
