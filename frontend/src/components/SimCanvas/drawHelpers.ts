@@ -121,14 +121,14 @@ export function drawDock(
 ) {
   const cx = scale.toCanvasX(config.dock_x);
   const cy = scale.toCanvasY(config.dock_y);
-  const size = 14;
+  const size = 36;
   ctx.fillStyle = "#f97316";
   ctx.fillRect(cx - size / 2, cy - size / 2, size, size);
   ctx.strokeStyle = "#fed7aa";
-  ctx.lineWidth = 1.5;
+  ctx.lineWidth = 2;
   ctx.strokeRect(cx - size / 2, cy - size / 2, size, size);
   ctx.fillStyle = "#fff";
-  ctx.font = "bold 9px sans-serif";
+  ctx.font = "bold 20px sans-serif";
   ctx.textAlign = "center";
   ctx.textBaseline = "middle";
   ctx.fillText("D", cx, cy);
@@ -262,7 +262,7 @@ export function drawUAVs(
     }
 
     const size = 10;
-    const iconDiameter = 76;
+    const iconDiameter = 104;
     const labelOffset = iconDiameter / 2 + 6;
     ctx.save();
     ctx.translate(cx, cy);
