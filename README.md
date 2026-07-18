@@ -2,6 +2,10 @@
 
 A full-stack web application for visualizing cooperative UAV task assignment optimized by multi-agent Proximal Policy Optimization (PPO).
 
+## Goal
+
+The goal is to develop a system in which multiple UAVs transport medical supplies to disaster areas. Multiple UAVs cooperate to quickly and efficiently carry medical supplies to the necessary locations within the disaster area.
+
 ## Demo
 
 **Simulation in progress** — UAVs flying from the dock, cooperating on tasks in real time:
