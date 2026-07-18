@@ -4,8 +4,6 @@ export function AreaConfig() {
   const {
     areaWidth, setAreaWidth,
     areaHeight, setAreaHeight,
-    dockX, setDockX,
-    dockY, setDockY,
     simSpeedMs, setSimSpeedMs,
     totalTimesteps, setTotalTimesteps,
   } = useConfigStore();
@@ -28,22 +26,6 @@ export function AreaConfig() {
           <input
             type="number" min={20} value={areaHeight}
             onChange={(e) => setAreaHeight(Math.max(20, +e.target.value))}
-            className="w-full bg-slate-800 border border-slate-600 rounded px-2 py-1 text-sm text-white"
-          />
-        </div>
-        <div>
-          <label className="text-xs text-slate-500 block mb-1">Dock X</label>
-          <input
-            type="number" value={dockX}
-            onChange={(e) => setDockX(+e.target.value)}
-            className="w-full bg-slate-800 border border-slate-600 rounded px-2 py-1 text-sm text-white"
-          />
-        </div>
-        <div>
-          <label className="text-xs text-slate-500 block mb-1">Dock Y</label>
-          <input
-            type="number" value={dockY}
-            onChange={(e) => setDockY(+e.target.value)}
             className="w-full bg-slate-800 border border-slate-600 rounded px-2 py-1 text-sm text-white"
           />
         </div>

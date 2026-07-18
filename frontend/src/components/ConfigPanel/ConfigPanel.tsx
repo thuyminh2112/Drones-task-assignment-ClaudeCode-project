@@ -5,6 +5,7 @@ import { useSimStore } from "../../store/simStore";
 import { AreaConfig } from "./AreaConfig";
 import { TaskWorkloadConfig } from "./TaskWorkloadConfig";
 import { UAVCapacityConfig } from "./UAVCapacityConfig";
+import { UAVInitialPositionConfig } from "./UAVInitialPositionConfig";
 
 interface Props {
   onStart: (sessionId: string) => void;
@@ -41,6 +42,8 @@ export function ConfigPanel({ onStart }: Props) {
 
       <div className="flex-1 p-4 space-y-6">
         <UAVCapacityConfig />
+        <div className="border-t border-slate-700" />
+        <UAVInitialPositionConfig />
         <div className="border-t border-slate-700" />
         <TaskWorkloadConfig />
         <div className="border-t border-slate-700" />
