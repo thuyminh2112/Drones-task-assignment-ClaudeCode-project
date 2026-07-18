@@ -1,8 +1,14 @@
 # -*- mode: python ; coding: utf-8 -*-
-# Build with: pyinstaller desktop/build.spec --noconfirm   (run from the repo root)
+# Build with: pyinstaller desktop/build.spec --noconfirm   (run from anywhere —
+# paths below are resolved off SPECPATH, PyInstaller's global for this file's
+# own directory, not the current working directory)
+import os
+
 from PyInstaller.utils.hooks import collect_all
 
-datas = [("frontend/dist", "frontend_dist")]
+REPO_ROOT = os.path.dirname(SPECPATH)  # SPECPATH == .../desktop
+
+datas = [(os.path.join(REPO_ROOT, "frontend", "dist"), "frontend_dist")]
 binaries = []
 hiddenimports = [
     "uvicorn.logging",
@@ -26,8 +32,8 @@ for pkg in ("torch",):
     hiddenimports += h
 
 a = Analysis(
-    ["desktop/launcher.py"],
-    pathex=["."],
+    [os.path.join(SPECPATH, "launcher.py")],
+    pathex=[REPO_ROOT],
     binaries=binaries,
     datas=datas,
     hiddenimports=hiddenimports,
